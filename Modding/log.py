@@ -5,20 +5,17 @@ from datetime import datetime, timezone
 # CONFIGURATION
 # ======================================
 
-SERVER_ID = 
+SERVER_ID = 1480390027593777287
 
-LOG_CHANNEL_ID = 
-MESSAGE_LOG_CHANNEL_ID = 
-USER_LOG_CHANNEL_ID = 
+LOG_CHANNEL_ID = 1486952263250477126
+MESSAGE_LOG_CHANNEL_ID = 1486952344796270693
+USER_LOG_CHANNEL_ID = 1486952230425722901
 
-POLL_CHANNEL_ID = 
-SCRIPTURE_CHANNEL_ID = 
-OFFICIAL_MOD_CHANNEL_ID = 
+SCRIPTURE_CHANNEL_ID = 1486956103207096340
+OFFICIAL_MOD_CHANNEL_ID = 1482168928045367349
 
-SKYLAR_USER_ID = 
-
-MINOR_ROLE_ID = 
-MINOR_ALERT_PING_ROLE_ID = 
+MINOR_ROLE_ID = 1486955537286299700
+MINOR_ALERT_PING_ROLE_ID = 1486955771303301291
 
 # ======================================
 # BOT HOOKUP
@@ -123,8 +120,6 @@ async def log_member_remove(user: discord.Member):
 # ================= MESSAGE LOGS =================
 
 async def log_message_delete(message: discord.Message):
-    if message.channel.id == POLL_CHANNEL_ID:
-        return  # Ignore messages from the poll channel
 
     now = datetime.now(timezone.utc)
 
@@ -151,17 +146,8 @@ async def log_message_delete(message: discord.Message):
 
     await log_event(MESSAGE_LOG_CHANNEL_ID, embed)
 
-    if message.author.id == SKYLAR_USER_ID:
-        await message.channel.send(embed=embed)
-
-        scripture = bot.get_channel(SCRIPTURE_CHANNEL_ID)
-        if scripture:
-            await scripture.send(embed=embed)
-
 
 async def log_message_edit(before: discord.Message, after: discord.Message):
-    if before.channel.id == POLL_CHANNEL_ID:
-        return  # Ignore edits from the poll channel
 
     now = datetime.now(timezone.utc)
     jump_url = f"https://discord.com/channels/{before.guild.id}/{before.channel.id}/{before.id}"
