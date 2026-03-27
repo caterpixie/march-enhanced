@@ -12,14 +12,13 @@ from datetime import datetime, timezone
 # CONFIGURATION
 # ============================================================
 
-EMBED_LOG_COLOR = ""
+EMBED_LOG_COLOR = "#FE6FFE"
 
-TICKET_CHANNEL_ID = 
-SUPPORT_CATEGORY_ID = 
-LOG_CHANNEL_ID = 
+TICKET_CHANNEL_ID = 1483328460213719123
+SUPPORT_CATEGORY_ID = 1487175936230293747
+LOG_CHANNEL_ID = 1487175733884354650
 
 MOD_ROLE_IDS = {
-
 }
 
 # For the embeds created in the individual ticket channels for the user
@@ -29,48 +28,35 @@ TICKET_TYPES = {
         "write_roles": [],  
         "view_roles": [],
         "title": "Server Support Ticket",
-        "welcome": "thanks for opening a server support ticket! Please describe your issue, and we will be with you shortly."
+        "welcome": "Thanks for opening a server support ticket! Please describe your issue, and we will be with you shortly."
     },
     "mod-help": {
         "name_prefix": "mod-help",
         "write_roles": [],  
         "view_roles": [],
         "title": "Mod Help Ticket",
-        "welcome": "thank you for submitting a mod help ticket! Please make sure that you have checked the troubleshooting guide. Once you have, describe your issue and we will be with you as soon as we can."
-    },
-    "bug-report": {
-        "name_prefix": "bug-report",
-        "write_roles": [],  
-        "view_roles": [],  
-        "title": "Bug Report Ticket",
-        "welcome": "thank you for submitting a bug report ticket! Please describe as well as provide some screenshots of the issue, and we will be with you as soon as we can."
+        "welcome": "Thank you for submitting a mod help ticket! Please describe your issue and I will be with you as soon as I can. Feel free to also ask in <#1483328022890287154> if I'm unavailable"
     },
     "other": {
         "name_prefix": "other",
         "write_roles": [],  
         "view_roles": [],
         "title": "Some Other Kinda Ticket",
-        "welcome": "thanks for opening a ticket! Please describe your issue, and we will be with you shortly."
+        "welcome": "Thanks for opening a ticket! Please describe your issue, and we will be with you shortly."
     }
 }
 
 # For the ticket panel in the support channel
 TICKET_PANEL = {
     "main_description": (
-        "Still need to talk to staff about your mods, need to report a bug, or have some questions about the server?\n\nClick the button below to create a ticket!"
-    ),
-    "troubleshooting": {
-        "enabled": True,
-        "text": (
-            "Need help with your mods? Most of your questions can be answered in this [troubleshooting guide](https://www.nexusmods.com/stardewvalley/articles/3926)!"
-        ),
-    },
+        "Need to talk to staff about your mods, report a bug, or have some questions about the server?\n\nClick the button below to create a ticket!"
+        },
     "button": {
         "label": "Create Ticket",
         "emoji": "📨",
         "style": discord.ButtonStyle.secondary
     },
-    "color": "#D71919"
+    "color": "#FE6FFE"
 }
 
 # ============================================================
@@ -631,13 +617,6 @@ async def embed_setup(interaction: discord.Interaction):
     )
 
     await ticket_embed_channel.send(file=header_file)
-
-    if TICKET_PANEL["troubleshooting"]["enabled"]:
-        troubleshooting_embed = discord.Embed(
-            description=TICKET_PANEL["troubleshooting"]["text"],
-            color=discord.Color.from_str(TICKET_PANEL["color"]),
-        )
-        await ticket_embed_channel.send(embed=troubleshooting_embed)
 
     await ticket_embed_channel.send(embed=main_embed, view=TicketPanelView())
 
