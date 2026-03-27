@@ -21,11 +21,11 @@ class Client(commands.Bot):
         parsed = urllib.parse.urlparse(db_url)
     
         self.pool = await aiomysql.create_pool(
-            host="na01-sql.pebblehost.com",
-            port=3306,
-            user="customer_1370005_march_enhanced",
-            password="9MM3uJQ.EGcftprq4UXF=W=B",
-            db="customer_1370005_march_enhanced",
+            host=parsed.hostname,
+            port=parsed.port or 3306,
+            user=parsed.username,
+            password=parsed.password,
+            db=parsed.path[1:],
             autocommit=True,
         )
         
