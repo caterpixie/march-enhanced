@@ -17,8 +17,8 @@ class Client(commands.Bot):
         self.pool = None
 
     async def setup_hook(self):
-        db_url = os.getenv("DATABASE_URL")
-        parsed = urllib.parse.urlparse(db_url)
+        #db_url = os.getenv("DATABASE_URL")
+        #parsed = urllib.parse.urlparse(db_url)
     
         self.pool = await aiomysql.create_pool(
             host=os.getenv("DB_HOST"),
