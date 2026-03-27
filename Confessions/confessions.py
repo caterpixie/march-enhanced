@@ -127,7 +127,7 @@ async def record_denial_event(
 ) -> int:
     """
     Inserts a NEW denial event row with a precise interaction timestamp (NOW()).
-    Returns the user's total number of denial events after insert.
+    Returns the user's total number of denial events  insert.
     """
     async with bot.pool.acquire() as conn:
         async with conn.cursor() as cur:
@@ -310,7 +310,7 @@ class ApprovalView(View):
                 color=discord.Color.red()
             )
             await self.submitter.send(
-                "Your confession in After Dark has been denied.",
+                "Your confession has been denied.",
                 embed=embed
             )
         except discord.Forbidden:
@@ -358,7 +358,7 @@ class DenyReasonModal(Modal, title="Deny Confession with Reason"):
         )
         try:
             await self.submitter.send(
-                f"Your confession in After Dark was denied.\n**Reason:**\n{self.reason.value}",
+                f"Your confession was denied.\n**Reason:**\n{self.reason.value}",
                 embed=embed
             )
         except discord.Forbidden:
