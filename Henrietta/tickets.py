@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 # CONFIGURATION
 # ============================================================
 
-EMBED_LOG_COLOR = "#FE6FFE"
+EMBED_LOG_COLOR = "#FFC6D6"
 
 TICKET_CHANNEL_ID = 1483328460213719123
 SUPPORT_CATEGORY_ID = 1487175936230293747
@@ -48,15 +48,16 @@ TICKET_TYPES = {
 
 # For the ticket panel in the support channel
 TICKET_PANEL = {
-    "main_description": {
+    "main_description": (
         "Need to talk to staff about your mods, report a bug, or have some questions about the server?\n\nClick the button below to create a ticket!"
-        },
+        )        
+    },
     "button": {
         "label": "Create Ticket",
         "emoji": "📨",
         "style": discord.ButtonStyle.secondary
     },
-    "color": "#FE6FFE"
+    "color": "#FFC6D6"
 }
 
 # ============================================================
