@@ -11,18 +11,18 @@ import asyncio
 # CONFIGURATION
 # ============================================
 
-CASE_LOG_CHANNEL_ID = 1322430975480692789
-LOCKDOWN_ANNOUNCE_CHANNEL_ID = 1372430570822307890  
+CASE_LOG_CHANNEL_ID = 
+LOCKDOWN_ANNOUNCE_CHANNEL_ID =  
 
-GAG_ROLE_ID = 1322686350063042610 
+GAG_ROLE_ID =  
 
-APPEAL_FORM_URL = "https://forms.gle/WewQpkxHz2e6vJCx9"
+APPEAL_FORM_URL = ""
 
 WARNS_PER_PAGE = 10
 WARN_LOG_TIMEZONE = "America/Chicago"  
 WARN_LOG_TZ_LABEL = "CST"
 
-EMBED_COLOR_HEX = "#99FCFF"
+EMBED_COLOR_HEX = ""
 
 # Message deletion after ban (Discord API only uses 0-7 days)
 BAN_DELETE_DAYS_DEFAULT = 7
@@ -209,7 +209,7 @@ async def warn(interaction: discord.Interaction, user: discord.Member, reason: s
         # Auto-kick after 1st warn
         try:
             dm_kick = discord.Embed(
-                description="You have been automatically kicked from the After Dark server after receiving a warning. You can re-join whenever you'd like, but please make sure to read the rules. Another warning will lead to being muted.",
+                description="You have been automatically kicked from the March Fan Club server after receiving a warning. You can re-join whenever you'd like, but please make sure to read the rules. Another warning will lead to being muted.",
                 color=discord.Color.red(),
             )
             dm_kick.timestamp = now
@@ -227,7 +227,7 @@ async def warn(interaction: discord.Interaction, user: discord.Member, reason: s
                 )
 
         try:
-            await user.kick(reason=f"Automatically kicked after first warning. Reason: {reason}")
+            await user.kick(reason=f"Automatically kicked  first warning. Reason: {reason}")
         except discord.Forbidden:
             if interaction.response.is_done():
                 await interaction.followup.send(
@@ -278,7 +278,7 @@ async def warn(interaction: discord.Interaction, user: discord.Member, reason: s
         try:
             dm_embed = discord.Embed(
                 description=(
-                    "You have been automuted in the After Dark server after receiving 2 warnings. "
+                    "You have been automuted in the March Fan Club server after receiving 2 warnings. "
                     "In order for this mute to be lifted, you will need to open a ticket in the server."
                 ),
                 color=discord.Color.red(),
@@ -393,7 +393,7 @@ async def ban(
     # Try DM first
     try:
         dm_embed = discord.Embed(
-            description=f"You have been banned from the server After Dark.\n\n**Reason:** {reason}",
+            description=f"You have been banned from the March Fan Club server.\n\n**Reason:** {reason}",
             color=discord.Color.red(),
             timestamp=now
         )
@@ -536,7 +536,7 @@ async def kick(interaction: discord.Interaction, user: discord.Member, reason: s
 
     try:
         dm_embed = discord.Embed(
-            description=f"You have been kicked from the server After Dark.\n\n**Reason:** {reason}",
+            description=f"You have been kicked from the March Fan Club server.\n\n**Reason:** {reason}",
             color=discord.Color.orange(),
             timestamp=now
         )
@@ -581,11 +581,11 @@ async def mute(interaction: discord.Interaction, user: discord.Member, reason: s
     gag_role = interaction.guild.get_role(GAG_ROLE_ID)
     now = datetime.datetime.now(datetime.timezone.utc)
 
-    duration_text = f" || Duration: {duration}" if duration else " || Please open a ticket in After Dark to be unmuted."
+    duration_text = f" || Duration: {duration}" if duration else " || Please open a ticket in the March Fan Club server to be unmuted."
 
     try:
         dm_embed = discord.Embed(
-            description=f"You have been muted in the server After Dark.\n\n**Reason:** {reason}{duration_text}",
+            description=f"You have been muted in the server March Fan Club.\n\n**Reason:** {reason}{duration_text}",
             color=discord.Color.orange(),
             timestamp=now
         )
@@ -664,7 +664,7 @@ async def unmute(interaction: discord.Interaction, user: discord.Member):
         try:
             dm_embed = discord.Embed(
                 description=(
-                    "You have been unmuted in the server After Dark.\n"
+                    "You have been unmuted in the server March Fan Club.\n"
                     "Please review the server rules; note that the next moderation action will be a 30 day ban from the server."
                 ),
                 color=discord.Color.green(),
