@@ -7,9 +7,9 @@ import os
 # CONFIGURATION
 # =========================
 
-COUNTING_CHANNEL_ID = 1322430337132789851
+COUNTING_CHANNEL_ID = 
 
-LOSER_ROLE_ID = 1332969280165384254
+LOSER_ROLE_ID = 
 LOSER_ROLE_DURATION = 300 
 
 DATA_FILE = "counting_data.json"
@@ -21,7 +21,7 @@ MILESTONES = [
 FINAL_MILESTONE = 3000
 FUNNY_NUMBERS = [69, 420, 666, 8008]
 
-EMBED_COLOR = "#99FCFF"
+EMBED_COLOR = ""
 
 # Secret trigger for the hot men pics. Is deleted immediately after being posted to avoid user abuse
 TRIGGER_BYPASS_MESSAGE = "!zliwpj"
