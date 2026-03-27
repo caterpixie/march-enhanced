@@ -11,9 +11,9 @@ from zoneinfo import ZoneInfo
 # CONFIGURATION
 # ============================================================
 
-CONFESSION_CHANNEL_ID = 1322430350575669320
-CONFESSION_APPROVAL_CHANNEL_ID = 1322431042501738550
-CONFESSION_LOGS_CHANNEL_ID = 1322431064777429124
+CONFESSION_CHANNEL_ID = 
+CONFESSION_APPROVAL_CHANNEL_ID = 
+CONFESSION_LOGS_CHANNEL_ID = 
 
 COUNTER_FILE = "confession_counter.txt"
 LATEST_CONFESSION_FILE = "latest_confession.txt"
@@ -22,9 +22,9 @@ PENDING_CONFESSIONS_FILE = "pending_confessions.json"
 DENIAL_LOG_TIMEZONE = "America/Chicago"  
 DENIAL_LOG_TZ_LABEL = "CST"            
 
-COLOR_CONFESSION = "#DCA8FF"
-COLOR_REPLY = "#ECD0FF"
-COLOR_DENIAL_LOG = "#99FCFF"
+COLOR_CONFESSION = ""
+COLOR_REPLY = ""
+COLOR_DENIAL_LOG = ""
 
 # ============================================================
 # BOT HOOKUP
