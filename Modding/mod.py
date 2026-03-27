@@ -205,56 +205,7 @@ async def warn(interaction: discord.Interaction, user: discord.Member, reason: s
             warn_count = row[0] if row else 0
 
     # Take action based on warn count
-    if warn_count == 1:
-        # Auto-kick after 1st warn
-        try:
-            dm_kick = discord.Embed(
-                description="You have been automatically kicked from the March Fan Club server after receiving a warning. You can re-join whenever you'd like, but please make sure to read the rules. Another warning will lead to being muted.",
-                color=discord.Color.red(),
-            )
-            dm_kick.timestamp = now
-            await user.send(embed=dm_kick)
-        except discord.Forbidden:
-            if interaction.response.is_done():
-                await interaction.followup.send(
-                    f"Unable to DM {user.mention} before kicking them.",
-                    ephemeral=True,
-                )
-            else:
-                await interaction.response.send_message(
-                    f"Unable to DM {user.mention} before kicking them.",
-                    ephemeral=True,
-                )
-
-        try:
-            await user.kick(reason=f"Automatically kicked  first warning. Reason: {reason}")
-        except discord.Forbidden:
-            if interaction.response.is_done():
-                await interaction.followup.send(
-                    f"Unable to kick {user.mention} (missing permissions or hierarchy).",
-                    ephemeral=True,
-                )
-            else:
-                await interaction.response.send_message(
-                    f"Unable to kick {user.mention} (missing permissions or hierarchy).",
-                    ephemeral=True,
-                )
-            return
-
-        kick_log = discord.Embed(
-            title="User auto-kicked",
-            description=f"{user.mention} has been kicked after receiving their first warning.",
-            color=discord.Color.orange(),
-        )
-        kick_log.set_author(name=str(user), icon_url=safe_avatar_url(user))
-        kick_log.add_field(name="Reason", value=reason, inline=False)
-        kick_log.timestamp = now
-        kick_log.set_footer(text=f"ID:{user.id}")
-
-        if modlog_channel:
-            await modlog_channel.send(embed=kick_log)
-
-    elif warn_count == 2:
+    if warn_count == 2:
         # Auto-mute after second warn
         gag_role = interaction.guild.get_role(GAG_ROLE_ID)
         if gag_role:
