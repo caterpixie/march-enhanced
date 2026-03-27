@@ -17,8 +17,8 @@ from confessions import (
     ApprovalView,
 )
 
-CONFESSION_APPROVAL_CHANNEL = 1322431042501738550
-GUILD_ID = 1322423728457384018
+CONFESSION_APPROVAL_CHANNEL = 
+GUILD_ID = 
 
 async def restore_pending_confessions(bot: commands.Bot):
     if not os.path.exists("pending_confessions.json"):
