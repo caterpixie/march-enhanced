@@ -7,9 +7,9 @@ from safebrowsing import is_phishing_link
 # CONFIGURATION
 # ==================================
 
-SERVER_ID = 
+SERVER_ID = 1480390027593777287
 
-LOG_CHANNEL_ID = 
+LOG_CHANNEL_ID = 1486952036879827086
 
 NO_LINKS_CHANNEL_ID =   # general
 GIF_ONLY_CHANNEL_ID =   # spicy-general
@@ -94,36 +94,26 @@ async def log_event(channel_id: int, embed: discord.Embed):
 
 # -------- Checks --------
 
-async def check_no_links_in_general(message: discord.Message):
-
-    if message.channel.id not in (NO_LINKS_CHANNEL_ID, GIF_ONLY_CHANNEL_ID):
-        return False
-
-    if any(role.id in ADMIN_ROLE_IDS for role in message.author.roles):
-        return False
-
-    urls = re.findall(r'https?://\S+', message.content)
-    if not urls:
-        return False
-
-    if message.channel.id == NO_LINKS_CHANNEL_ID:
-        try:
-            await message.delete()
-        except discord.NotFound:
-            pass
-        return True
-
-    if message.channel.id == GIF_ONLY_CHANNEL_ID:
-        for url in urls:
-            if any(domain in url for domain in ALLOWED_GIF_DOMAINS):
-                continue
-            try:
-                await message.delete()
-            except discord.NotFound:
-                pass
-            return True
-
-    return False
+#async def check_no_links_in_general(message: discord.Message):
+#
+#    if message.channel.id not in (NO_LINKS_CHANNEL_ID, GIF_ONLY_CHANNEL_ID):
+#        return False
+#
+#   if any(role.id in ADMIN_ROLE_IDS for role in message.author.roles):
+#        return False
+#
+#    urls = re.findall(r'https?://\S+', message.content)
+#    if not urls:
+#        return False
+#
+#    if message.channel.id == NO_LINKS_CHANNEL_ID:
+#        try:
+#            await message.delete()
+#        except discord.NotFound:
+#            pass
+#        return True
+#
+#    return False
 
 async def check_slurs(message):
     content = message.content.lower()
