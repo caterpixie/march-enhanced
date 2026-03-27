@@ -8,8 +8,8 @@ import aiomysql
 # =========================
 # CONFIGURATION
 # =========================
-QOTD_CHANNEL_ID = 1322430254534361089
-QOTD_ROLE_ID = 1322427477053669406
+QOTD_CHANNEL_ID = 
+QOTD_ROLE_ID = 
 
 # Do not change timezone, it needs to stay America/Chicago to work with PebbleHost's server. Time is 1 hour behind on CST
 TIMEZONE_NAME = "America/Chicago" 
@@ -19,7 +19,7 @@ AUTO_POST_MINUTE = 20
 THREAD_NAME = "Answers"
 THREAD_AUTO_ARCHIVE_MINUTES = 1440
 
-EMBED_COLOR = "#9CEC61"
+EMBED_COLOR = ""
 QUEUE_PAGE_SIZE = 10
 
 # =========================
