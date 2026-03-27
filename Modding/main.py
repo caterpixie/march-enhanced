@@ -8,7 +8,7 @@ import aiomysql
 import urllib.parse
 from mod import set_bot as set_warn_bot, mod_group
 from log import setup_logging
-from funwarns import setup_funwarns
+# from funwarns import setup_funwarns
 from automod import setup_automod
 
 class Client(commands.Bot):
@@ -29,7 +29,7 @@ class Client(commands.Bot):
             autocommit=True,
         )
         
-        setup_funwarns(self)
+        # setup_funwarns(self)
         self.tree.add_command(mod_group)
         await self.tree.sync()
 
