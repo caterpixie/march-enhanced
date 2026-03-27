@@ -8,7 +8,6 @@ import aiomysql
 import urllib.parse
 
 from qotd import qotd_group, auto_post_qotd, set_bot as set_qotd_bot
-from chores import set_bot as set_chores_bot, auto_post_chores
 from uwu import set_bot as set_uwu_bot, uwu
 from triggers import set_bot as set_trigger_bot
 from starboard import setup_starboard
@@ -51,7 +50,6 @@ bot = Client(command_prefix="?", intents=intents)
 
 # Set bot instance in each module
 set_qotd_bot(bot)
-set_chores_bot(bot)
 set_uwu_bot(bot)
 set_trigger_bot(bot)
 set_count_bot(bot)
