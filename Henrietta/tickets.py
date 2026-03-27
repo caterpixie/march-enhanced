@@ -48,10 +48,7 @@ TICKET_TYPES = {
 
 # For the ticket panel in the support channel
 TICKET_PANEL = {
-    "main_description": (
-        "Need to talk to staff about your mods, report a bug, or have some questions about the server?\n\nClick the button below to create a ticket!"
-        )        
-    },
+    "main_description": "Need to talk to staff about your mods, report a bug, or have some questions about the server?\n\nClick the button below to create a ticket!",      
     "button": {
         "label": "Create Ticket",
         "emoji": "📨",
