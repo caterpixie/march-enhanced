@@ -21,11 +21,11 @@ class Client(commands.Bot):
         parsed = urllib.parse.urlparse(db_url)
     
         self.pool = await aiomysql.create_pool(
-            host=parsed.hostname,
-            port=parsed.port or 3306,
-            user=parsed.username,
-            password=parsed.password,
-            db=parsed.path[1:],
+            host=os.getenv("DB_HOST"),
+            port=int(os.getenv("DB_PORT", 3306)),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),
             autocommit=True,
         )
         
