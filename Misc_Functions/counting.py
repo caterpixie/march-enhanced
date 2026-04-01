@@ -2,6 +2,7 @@ import discord
 import asyncio
 import json
 import os
+import random
 
 # =========================
 # CONFIGURATION
@@ -14,17 +15,16 @@ LOSER_ROLE_DURATION = 300
 
 DATA_FILE = "counting_data.json"
 
-MILESTONES = [
-    10, 50, 100, 150, 200, 250, 300, 350, 400, 500,
-    600, 700, 800, 900, 1000, 1500, 2000, 2500
-]
 FINAL_MILESTONE = 3000
 FUNNY_NUMBERS = [69, 420, 666, 8008]
 
 EMBED_COLOR = ""
 
-# Secret trigger for the hot men pics. Is deleted immediately after being posted to avoid user abuse
 TRIGGER_BYPASS_MESSAGE = "!zliwpj"
+
+# Random milestone spacing
+RANDOM_MILESTONE_MIN = 25
+RANDOM_MILESTONE_MAX = 75
 
 # =========================
 # BOT HOOKUP
@@ -33,10 +33,15 @@ TRIGGER_BYPASS_MESSAGE = "!zliwpj"
 bot = None
 current_count = 0
 last_user_id = None
+next_milestone = 0
+
+
+def generate_next_milestone(current):
+    return current + random.randint(RANDOM_MILESTONE_MIN, RANDOM_MILESTONE_MAX)
 
 
 def load_count_data():
-    global current_count, last_user_id
+    global current_count, last_user_id, next_milestone
     if os.path.exists(DATA_FILE):
         try:
             with open(DATA_FILE, "r") as f:
@@ -46,24 +51,31 @@ def load_count_data():
                 data = json.loads(content)
                 current_count = data.get("current_count", 0)
                 last_user_id = data.get("last_user_id", None)
+                next_milestone = data.get("next_milestone", generate_next_milestone(current_count))
         except (json.JSONDecodeError, ValueError):
             print(f"Warning: {DATA_FILE} is empty or invalid. Resetting count.")
             current_count = 0
             last_user_id = None
+            next_milestone = generate_next_milestone(0)
             save_count_data()
     else:
         current_count = 0
         last_user_id = None
+        next_milestone = generate_next_milestone(0)
         save_count_data()
 
 
 def save_count_data():
     with open(DATA_FILE, "w") as f:
-        json.dump({"current_count": current_count, "last_user_id": last_user_id}, f)
+        json.dump({
+            "current_count": current_count,
+            "last_user_id": last_user_id,
+            "next_milestone": next_milestone
+        }, f)
 
 
 async def counting_on_message(message: discord.Message):
-    global current_count, last_user_id
+    global current_count, last_user_id, next_milestone
 
     if message.author.bot or message.channel.id != COUNTING_CHANNEL_ID:
         return
@@ -71,26 +83,40 @@ async def counting_on_message(message: discord.Message):
     guild = message.guild
     loser_role = guild.get_role(LOSER_ROLE_ID)
 
-    # Parse number
     try:
         number = int(message.content.strip())
     except ValueError:
         await message.delete()
         return
 
-    # Correct count
     if number == current_count + 1 and message.author.id != last_user_id:
         current_count = number
         last_user_id = message.author.id
-        save_count_data()
 
-        if number in FUNNY_NUMBERS:
+        if current_count >= next_milestone and current_count < FINAL_MILESTONE:
+            embed = discord.Embed(
+                title=f"Milestone Reached: {number}",
+                description=(
+                    f"{message.author.mention} hit the random milestone. "
+                    "Congratulations on counting again."
+                ),
+                color=discord.Color.from_str(EMBED_COLOR),
+            )
+            await message.channel.send(embed=embed)
+
+            msg = await message.channel.send(TRIGGER_BYPASS_MESSAGE)
+            await msg.delete()
+
+            next_milestone = generate_next_milestone(current_count)
+
+        elif number in FUNNY_NUMBERS:
             embed = discord.Embed(
                 title=f"Funny Number: {number}",
                 description="Nice.",
                 color=discord.Color.from_str(EMBED_COLOR),
             )
             await message.channel.send(embed=embed)
+
             msg = await message.channel.send(TRIGGER_BYPASS_MESSAGE)
             await msg.delete()
 
@@ -98,29 +124,18 @@ async def counting_on_message(message: discord.Message):
             embed = discord.Embed(
                 title=f"Milestone Reached: {number}",
                 description=(
-                    f"{message.author.mention} reached a milestone! "
-                    "This is your last milestone — this counting channel has gotten out of hand you nerds."
+                    f"{message.author.mention} reached the final milestone. "
+                    "This counting channel has gotten out of hand."
                 ),
                 color=discord.Color.from_str(EMBED_COLOR),
             )
             await message.channel.send(embed=embed)
+
             msg = await message.channel.send(TRIGGER_BYPASS_MESSAGE)
             await msg.delete()
 
-        elif number in MILESTONES:
-            embed = discord.Embed(
-                title=f"Milestone Reached: {number}",
-                description=(
-                    f"{message.author.mention} reached a milestone! "
-                    "Here's a dopamine hit for knowing how to count I guess."
-                ),
-                color=discord.Color.from_str(EMBED_COLOR),
-            )
-            await message.channel.send(embed=embed)
-            msg = await message.channel.send(TRIGGER_BYPASS_MESSAGE)
-            await msg.delete()
+        save_count_data()
 
-    # Wrong count → reset
     else:
         await message.delete()
 
@@ -136,6 +151,7 @@ async def counting_on_message(message: discord.Message):
 
         current_count = 0
         last_user_id = None
+        next_milestone = generate_next_milestone(0)
         save_count_data()
 
         if loser_role:
