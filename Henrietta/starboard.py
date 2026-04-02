@@ -17,10 +17,6 @@ EMBED_COLOR = "#FFC6D6"
 # =========================
 # BOT HOOKUP
 # =========================
-bot = None
-starred_messages = {}
-
-
 def set_bot(bot_instance):
     global bot
     bot = bot_instance
@@ -62,7 +58,11 @@ def setup_starboard(bot_instance: discord.Client):
             return
 
         embed = discord.Embed(
-            description=(f"{message.content}\n\n[Jump to Message!]({message.jump_url})" if message.content else f"[No text]\n\n[Jump to Message!]({message.jump_url})"),
+            description=(
+                f"{message.content}\n\n[Jump to Message!]({message.jump_url})"
+                if message.content
+                else f"[No text]\n\n[Jump to Message!]({message.jump_url})"
+            ),
             color=discord.Color.from_str(EMBED_COLOR),
         )
         embed.set_author(
@@ -71,17 +71,33 @@ def setup_starboard(bot_instance: discord.Client):
         )
         embed.timestamp = datetime.now(timezone.utc)
 
+        files = []
         if message.attachments:
-            embed.set_image(url=message.attachments[0].url)
+            attachment = message.attachments[0]
+
+            # Re-upload the attachment so spoiler status is preserved
+            file = await attachment.to_file(
+                use_cached=True,
+                spoiler=attachment.is_spoiler()
+            )
+            files.append(file)
+
+            # Point the embed at the re-uploaded attachment
+            embed.set_image(url=f"attachment://{file.filename}")
 
         key = (message.id, emoji)
 
         if key in starred_messages:
             try:
                 old_msg = await starboard.fetch_message(starred_messages[key])
-                await old_msg.edit(content=f"{emoji} {count}", embed=embed)
+                await old_msg.edit(content=f"{emoji} {count}", embed=embed, attachments=files)
             except discord.NotFound:
                 del starred_messages[key]
-        else:
-            starboard_msg = await starboard.send(content=f"{emoji} {count}", embed=embed)
+
+        if key not in starred_messages:
+            starboard_msg = await starboard.send(
+                content=f"{emoji} {count}",
+                embed=embed,
+                files=files
+            )
             starred_messages[key] = starboard_msg.id
