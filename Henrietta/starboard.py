@@ -12,7 +12,7 @@ EXCLUDED_CHANNEL_IDS = [
 STAR_EMOJIS = {"⭐"}
 STAR_THRESHOLD = 1
 
-EMBED_COLOR = "#FE6FFE"
+EMBED_COLOR = "#FFC6D6"
 
 # =========================
 # BOT HOOKUP
