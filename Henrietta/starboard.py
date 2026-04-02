@@ -17,6 +17,8 @@ EMBED_COLOR = "#FFC6D6"
 # =========================
 # BOT HOOKUP
 # =========================
+starred_messages = {}
+
 def set_bot(bot_instance):
     global bot
     bot = bot_instance
