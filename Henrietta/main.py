@@ -49,6 +49,7 @@ class Client(commands.Bot):
         guild = discord.Object(id=GUILD_ID)
         self.tree.copy_global_to(guild=guild)
         synced = await self.tree.sync(guild=guild)
+        setup_starboard(self)
 
         print(f"Synced commands to guild {GUILD_ID}: {[cmd.name for cmd in synced]}")
 
