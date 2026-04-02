@@ -7,6 +7,7 @@ import discord
 from discord.ext import commands
 import aiomysql
 
+from starboard import setup_starboard
 from mod import set_bot as set_warn_bot, mod_group
 from log import setup_logging
 from automod import setup_automod
