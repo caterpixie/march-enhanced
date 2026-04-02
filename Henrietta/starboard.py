@@ -5,14 +5,14 @@ from datetime import datetime, timezone
 # CONFIGURATION
 # =========================
 
-STARBOARD_CHANNEL_ID = 
+STARBOARD_CHANNEL_ID = 1486956103207096340
 EXCLUDED_CHANNEL_IDS = [
 ]
 
-STAR_EMOJIS = {"🍅","⭐"}
-STAR_THRESHOLD = 3
+STAR_EMOJIS = {"⭐"}
+STAR_THRESHOLD = 1
 
-EMBED_COLOR = ""
+EMBED_COLOR = "FE6FFE"
 
 # =========================
 # BOT HOOKUP
