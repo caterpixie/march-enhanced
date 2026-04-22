@@ -104,6 +104,7 @@ class Client(commands.Bot):
         set_warn_bot(self)
         set_ticket_bot(self)
         set_confessions_bot(self)
+        set_uwu_bot(self)
 
         # Persistent views
         self.add_view(TicketPanelView())
@@ -119,7 +120,7 @@ class Client(commands.Bot):
         self.tree.add_command(ticket_group)
         self.tree.add_command(confession_group)
         self.tree.add_command(reply_to_confession_context)
-
+        
         # Sync to guild for faster testing / immediate availability
         guild = discord.Object(id=GUILD_ID)
         self.tree.copy_global_to(guild=guild)
