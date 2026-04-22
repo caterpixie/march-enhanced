@@ -268,7 +268,6 @@ class TicketTypeSelect(ui.Select):
         options = [
             discord.SelectOption(label="Server Support", value="server-support"),
             discord.SelectOption(label="Mod Help", value="mod-help"),
-            discord.SelectOption(label="Report a Bug", value="bug-report"),
             discord.SelectOption(label="Other", value="other")
         ]
 
