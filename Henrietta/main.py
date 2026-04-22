@@ -18,6 +18,7 @@ from confessions import (
 from starboard import setup_starboard
 from mod import set_bot as set_warn_bot, mod_group
 from log import setup_logging
+from uwu import set_bot as set_uwu_bot, uwu
 from automod import setup_automod
 from tickets import (
     ticket_group,
