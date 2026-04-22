@@ -11,20 +11,20 @@ from zoneinfo import ZoneInfo
 # CONFIGURATION
 # ============================================================
 
-CONFESSION_CHANNEL_ID = 
-CONFESSION_APPROVAL_CHANNEL_ID = 
-CONFESSION_LOGS_CHANNEL_ID = 
+CONFESSION_CHANNEL_ID = 1496373203986157838
+CONFESSION_APPROVAL_CHANNEL_ID = 1482168928045367349
+CONFESSION_LOGS_CHANNEL_ID = 1496371813259939891
 
 COUNTER_FILE = "confession_counter.txt"
 LATEST_CONFESSION_FILE = "latest_confession.txt"
 PENDING_CONFESSIONS_FILE = "pending_confessions.json"
 
-DENIAL_LOG_TIMEZONE = "America/Chicago"  
-DENIAL_LOG_TZ_LABEL = "CST"            
+DENIAL_LOG_TIMEZONE = "America/Toronto"  
+DENIAL_LOG_TZ_LABEL = "EST"            
 
-COLOR_CONFESSION = ""
-COLOR_REPLY = ""
-COLOR_DENIAL_LOG = ""
+COLOR_CONFESSION = "#FFC6D6"
+COLOR_REPLY = "#CC718A"
+COLOR_DENIAL_LOG = "#FFC6D6"
 
 # ============================================================
 # BOT HOOKUP
