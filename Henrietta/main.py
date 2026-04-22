@@ -120,6 +120,7 @@ class Client(commands.Bot):
         self.tree.add_command(ticket_group)
         self.tree.add_command(confession_group)
         self.tree.add_command(reply_to_confession_context)
+        self.tree.add_command(uwu)
         
         # Sync to guild for faster testing / immediate availability
         guild = discord.Object(id=GUILD_ID)
