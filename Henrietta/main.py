@@ -154,5 +154,6 @@ bot = Client(
 
 setup_logging(bot)
 setup_automod(bot)
+set_trigger_bot(bot)
 
 bot.run(os.getenv("DISCORD_TOKEN"))
