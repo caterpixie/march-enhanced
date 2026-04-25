@@ -55,10 +55,10 @@ async def on_member_join_welcome(member: discord.Member):
     )
 
     embed = discord.Embed(
-        title=f"Welcome to {member.guild.name}, {member.display_name}! <:m_catwave:1492369099488231459>",
+        title=f"Welcome to {member.guild.name}, {member.display_name}!",
         description=(
             f"**Get your ass over to {rules_mention} and accept the rules** to unlock the rest of the server~\n\n"
-            f"Then (if you wanna) you can use this template to introduce yourself to the sever!"
+            f"Then (if you wanna) you can use this template to introduce yourself to the sever! <:m_catwave:1492369099488231459>\n"
         ),
         color=discord.Color.from_str(EMBED_COLOR),
     )
