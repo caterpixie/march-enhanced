@@ -19,7 +19,7 @@ INTRO_TEMPLATE = (
     "**What other games do you play?:**\n"
     "**Hobbies:**\n"
     "**Send a picture of your pet 🫴**\n"
-
+)
 # ======================================
 # BOT HOOKUP
 # ======================================
