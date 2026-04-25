@@ -21,6 +21,7 @@ from log import setup_logging
 from uwu import set_bot as set_uwu_bot, uwu
 from triggers import set_bot as set_trigger_bot
 from automod import setup_automod
+from welcome import setup_welcome
 from tickets import (
     ticket_group,
     set_bot as set_ticket_bot,
@@ -154,6 +155,7 @@ bot = Client(
 
 setup_logging(bot)
 setup_automod(bot)
+setup_welcome(bot) 
 set_trigger_bot(bot)
 
 bot.run(os.getenv("DISCORD_TOKEN"))
