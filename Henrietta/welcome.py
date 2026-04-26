@@ -14,6 +14,8 @@ EMBED_COLOR = "#FFC6D6"
 
 INTRO_TEMPLATE = (
     "**Name/Nickname:**\n"
+    "**Timezone:**\n
+    "**Pings/DMs okay?:**\n
     "**Your favorite FoM NPC:**\n"
     "**Why you joined the server:**\n"
     "**What other games do you play?:**\n"
